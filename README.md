@@ -24,7 +24,7 @@ Agora você pode acessar a API do *Django REST Framework* em [```http://127.0.0.
 
 ## Autenticação JWT
 
-A aplicação utiliza JWT como autenticação, ou seja, será necessário obter o *token* através de uma requisição ```POST``` para a rota [```http://127.0.0.1:8000/token/```](http://127.0.0.1:8000/token/). Exemplo:
+A aplicação utiliza o [JWT](https://jwt.io/) como autenticação, ou seja, será necessário obter o *token* através de uma requisição ```POST``` para a rota [```http://127.0.0.1:8000/token/```](http://127.0.0.1:8000/token/) e enviá-lo no cabeçalho da requisição. Exemplo:
 
 ~~~python3
 
