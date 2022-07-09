@@ -89,4 +89,4 @@ E por fim, através da rota [```http://127.0.0.1:8000/users/<id>```](http://127.
 
 Onde ```<id>``` é o ID do usuário cadastrado no banco de dados. Exemplo:
 
-[```http://127.0.0.1:8000/books/1/```](http://127.0.0.1:8000/books/1/)
+[```http://127.0.0.1:8000/users/1/```](http://127.0.0.1:8000/users/1/)
