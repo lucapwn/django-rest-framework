@@ -1,92 +1,89 @@
 # Django REST Framework
-Projeto utilizando o [*Django REST Framework*](https://www.django-rest-framework.org/) como trabalho da disciplina de Tópicos Especiais em Desenvolvimento Web.
 
-Através da API, você poderá acessar todos os métodos HTTP para a realização de um CRUD em uma aplicação.
+This project is an [API](https://github.com/lucapwn/django-rest-framework) for user registration in CRUD format, which uses the [Django REST Framework](https://www.django-rest-framework.org/) for its operation.
 
-## Executando
->Instale as dependências do projeto
-~~~shell
-$ pip install -r requirements.txt
-~~~
->Aplique as alterações das tabelas no SQLite
-~~~shell
-$ python manage.py migrate
-~~~
->Crie um usuário administrador
-~~~shell
-$ python manage.py createsuperuser
-~~~
->Execute a aplicação
-~~~shell
-$ python manage.py runserver
-~~~
-Agora você pode acessar a API do *Django REST Framework* em [```http://127.0.0.1:8000/```](http://127.0.0.1:8000/).
+![Badge](https://img.shields.io/static/v1?label=license&message=MIT&color=1E90FF)
+![Badge](https://img.shields.io/static/v1?label=build&message=passing&color=00d110)
 
-## Autenticação JWT
+## Content
 
-A aplicação utiliza o [JWT](https://jwt.io/) como autenticação, ou seja, será necessário obter o *token* através de uma requisição ```POST``` para a rota [```http://127.0.0.1:8000/token/```](http://127.0.0.1:8000/token/) e enviá-lo no cabeçalho da requisição. Exemplo:
+- [About](#about)
+- [Routes](#routes)
+- [Support](#support)
+- [Running](#running)
+- [Notes](#notes)
+- [Screenshot](#screenshot)
+- [Author](#author)
+- [License](#license)
+
+## About
+
+Through this API (Application Programming Interface), you can perform a CRUD (Create, Read, Update and Delete) and access all HTTP methods of a Rest API to manipulate user data.
+
+For added security, this application features [JWT](https://jwt.io/) authentication integration. In other words, to be able to access the routes of this API, you will need to be authenticated like our application [example](https://github.com/lucapwn/django-rest-framework/blob/main/example.py).
+
+To perform authentication via JWT, we simply send the Django user and password in the request header to get the token for our authentication.
+
+### Routes
+
+Through the ```/users``` route we can register and get the users' data. These are the HTTP methods available for this route: ```GET```, ```POST```, ```HEAD``` and ```OPTIONS```.
+
+Through the ```/users/<id>``` route we can delete and update user data. These are the HTTP methods available for this route: ```PUT``` and ```DELETE```. Where ```<id>``` is the ID of the user registered in the database.
+
+## Support
+
+This software is compatible with Windows and GNU/Linux operating systems.
+
+I could not test it on macOS, but I believe it is functional as well.
+
+## Running
+
+Install the project dependencies:
+
+~~~console
+foo@bar:~$ pip3 install -r ./requirements.txt
+~~~
+
+Apply the changes to the database, create an administrator user and run the application:
+
+~~~console
+foo@bar:~$ python3 ./api/manage.py migrate
+foo@bar:~$ python3 ./api/manage.py createsuperuser
+foo@bar:~$ python3 ./api/manage.py runserver
+~~~
+
+Now you can run the example:
+
+~~~console
+foo@bar:~$ python3 ./example.py
+~~~
+
+After running the Django server, you can access the API interface at this address: [```http://127.0.0.1:8000/```](http://127.0.0.1:8000/.).
+
+### Notes
+
+The user and password you defined above should be used in JWT authentication, as per the [example](https://github.com/lucapwn/django-rest-framework/blob/c5a24bcc20e2003d34a66e001f02e5017e2053ca/example.py#L96):
 
 ~~~python3
+api = API(username="admin", password="admin")
+~~~~
 
-import json
-import requests
+To disable JWT authentication for this application, simply comment out line 9 of the [./api/users/api/viewsets.py](https://github.com/lucapwn/django-rest-framework/blob/c5a24bcc20e2003d34a66e001f02e5017e2053ca/api/users/api/viewsets.py#L9) file:
 
-class Token:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
-
-    def get_token(self):
-        payload = {
-            'username': self.username,
-            'password': self.password
-        }
-
-        response = requests.post("http://127.0.0.1:8000/token/", data=payload)
-
-        return response.text
-
-    def get_users(self):
-        token = json.loads(self.get_token())['access']
-
-        headers = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {token}',
-        }
-
-        response = requests.get("http://127.0.0.1:8000/users/?format=json", headers=headers)
-
-        return response.text
-
-def main():
-    # Consider the user "admin" and password "admin" in the Django admin panel.
-    # http://127.0.0.1:8000/admin/
-
-    api = Token(username='admin', password='admin')
-
-    print(api.get_token())
-    print(api.get_users())
-
-if __name__ == "__main__":
-    main()
-
+~~~python3
+# permission_classes = (IsAuthenticated,)
 ~~~
 
-Em breve, será adicionado outros métodos para a realização do CRUD.
+## Screenshot
 
-## Rotas
-Através da rota [```http://127.0.0.1:8000/users/```](http://127.0.0.1:8000/users/), você poderá acessar os seguintes métodos HTTP:
+The image below illustrates the API interface.
 
-* GET
-* POST
-* HEAD
-* OPTIONS
+![](https://lh3.googleusercontent.com/u/1/drive-viewer/AFDK6gM4pawQgwkNaJiyRS-1xR6JwcgDJ5eI72eKwnutc4quG_KAqlzkD4ULPDLQ6vthBVk4fy2poG2gKaKucmAVjLFwXSbWHA=w1669-h947)
 
-E por fim, através da rota [```http://127.0.0.1:8000/users/<id>```](http://127.0.0.1:8000/users/<id>), você poderá acessar os seguintes métodos HTTP:
+## Author
 
-* PUT
-* DELETE
+Developed by [Lucas Araújo](https://github.com/lucapwn).
 
-Onde ```<id>``` é o ID do usuário cadastrado no banco de dados. Exemplo:
+## License
 
-[```http://127.0.0.1:8000/users/1/```](http://127.0.0.1:8000/users/1/)
+This software is [MIT](https://choosealicense.com/licenses/mit/) licensed.
