@@ -8,10 +8,10 @@ This project is an [API](https://github.com/lucapwn/django-rest-framework) for u
 ## Content
 
 - [About](#about)
-- [Routes](#routes)
+  - [Routes](#routes)
 - [Support](#support)
 - [Running](#running)
-- [Notes](#notes)
+  - [Notes](#notes)
 - [Screenshot](#screenshot)
 - [Author](#author)
 - [License](#license)
