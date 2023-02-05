@@ -78,7 +78,7 @@ To disable JWT authentication for this application, simply comment out line 9 of
 
 The image below illustrates the API interface.
 
-![](https://lh3.googleusercontent.com/u/1/drive-viewer/AFDK6gPnlKNB0-Dn9ilQb1aE6J1C8e7CSW1G0-3-nR8hHd3WG4nBcT362nraKwclbOQ-rickMoTeULRUZHMqiyodQ_pj0Cal5w=w1920-h947)
+![](https://user-images.githubusercontent.com/58787069/216812468-6a1517fd-13f6-4009-83dd-18ce48eefba4.PNG)
 
 ## Author
 
